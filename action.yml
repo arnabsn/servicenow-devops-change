@@ -63,4 +63,4 @@ branding:
   color: 'green'
 runs: 
   using: 'node20'
-  main: 'src/main.js'
+  main: 'dist/index.js'

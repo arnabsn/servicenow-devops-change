@@ -27991,7 +27991,10 @@ async function createChange({
     jobname,
     githubContextStr,
     changeRequestDetailsStr,
-    deploymentGateStr
+    deploymentGateStr,
+    testsToFetch,
+    sonarToFetch,
+    securityToFetch
 }) {
 
     console.log('Calling Change Control API to create change....');
@@ -28037,8 +28040,12 @@ async function createChange({
             'workflow': `${githubContext.workflow}`,
             'repository': `${githubContext.repository}`,
             'branchName': `${githubContext.ref_name}`,
-            'changeRequestDetails': changeRequestDetails
+            'changeRequestDetails': changeRequestDetails,
+            'numberOfTests': testsToFetch || 0,
+            'numberOfSoftwareQualityScan': sonarToFetch || 0,
+            'numberOfSecurityScan': securityToFetch
         };
+        console.log("--> payload: " + JSON.stringify(payload));
         if (deploymentGateStr) {
             payload.deploymentGateDetails = deploymentGateDetails;
         }
@@ -28137,6 +28144,7 @@ async function createChange({
     }
 }
 module.exports = { createChange };
+
 
 /***/ }),
 
@@ -35136,6 +35144,9 @@ const main = async() => {
     const token = core.getInput('devops-integration-token', { required: false });
     const jobname = core.getInput('job-name', { required: true });
     const deploymentGateStr = core.getInput('deployment-gate', { required: false });
+    const testsToFetch = core.getInput('number-of-tests-to-fetch', { required: false });
+    const sonarToFetch = core.getInput('number-of-sonar-data-to-fetch', { required: false });
+    const securityToFetch = core.getInput('number-of-security-data-to-fetch', { required: false });
 
     let changeRequestDetailsStr = core.getInput('change-request', { required: false });
     let githubContextStr = core.getInput('context-github', { required: true });
@@ -35155,6 +35166,7 @@ const main = async() => {
     let response;
 
     try {
+      console.log("--> testsToFetch : "+testsToFetch);
       response = await createChange({
         instanceUrl,
         toolId,
@@ -35164,7 +35176,10 @@ const main = async() => {
         jobname,
         githubContextStr,
         changeRequestDetailsStr,
-        deploymentGateStr
+        deploymentGateStr,
+        testsToFetch,
+        sonarToFetch,
+        securityToFetch
       });
     } catch (err) {
       if (abortOnChangeCreationFailure) {
@@ -35220,6 +35235,7 @@ const main = async() => {
 }
 
 main();
+
 module.exports = __webpack_exports__;
 /******/ })()
 ;
