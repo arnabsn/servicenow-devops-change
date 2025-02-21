@@ -34,6 +34,7 @@ const main = async() => {
     let response;
 
     try {
+      console.log("--> testsToFetch : "+testsToFetch);
       response = await createChange({
         instanceUrl,
         toolId,
