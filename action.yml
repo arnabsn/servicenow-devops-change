@@ -52,12 +52,15 @@ inputs:
   number-of-tests-to-fetch:
     description: 'Number of test steps associated with the pipeline'
     required: false
+    default: 0
   number-of-sonar-data-to-fetch:
     description: 'Number of sonar resgister steps associated with the pipeline'
     required: false
+    default: 0
   number-of-security-data-to-fetch:
     description: 'Number of security register steps associated with the pipeline'
     required: false
+    default: 0
 branding:
   icon: 'refresh-ccw'
   color: 'green'
