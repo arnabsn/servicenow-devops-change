@@ -10,7 +10,10 @@ async function createChange({
     jobname,
     githubContextStr,
     changeRequestDetailsStr,
-    deploymentGateStr
+    deploymentGateStr,
+    testsToFetch,
+    sonarToFetch,
+    securityToFetch
 }) {
 
     console.log('Calling Change Control API to create change....');
@@ -56,7 +59,10 @@ async function createChange({
             'workflow': `${githubContext.workflow}`,
             'repository': `${githubContext.repository}`,
             'branchName': `${githubContext.ref_name}`,
-            'changeRequestDetails': changeRequestDetails
+            'changeRequestDetails': changeRequestDetails,
+            'numberOfTests': testsToFetch || 0,
+            'numberOfSoftwareQualityScan': sonarToFetch || 0,
+            'numberOfSecurityScan': securityToFetch
         };
         if (deploymentGateStr) {
             payload.deploymentGateDetails = deploymentGateDetails;
