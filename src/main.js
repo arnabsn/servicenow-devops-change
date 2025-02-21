@@ -12,6 +12,9 @@ const main = async() => {
     const token = core.getInput('devops-integration-token', { required: false });
     const jobname = core.getInput('job-name', { required: true });
     const deploymentGateStr = core.getInput('deployment-gate', { required: false });
+    const testsToFetch = core.getInput('number-of-tests-to-fetch', { required: false });
+    const sonarToFetch = core.getInput('number-of-sonar-data-to-fetch', { required: false });
+    const securityToFetch = core.getInput('number-of-security-data-to-fetch', { required: false });
 
     let changeRequestDetailsStr = core.getInput('change-request', { required: false });
     let githubContextStr = core.getInput('context-github', { required: true });
@@ -40,7 +43,10 @@ const main = async() => {
         jobname,
         githubContextStr,
         changeRequestDetailsStr,
-        deploymentGateStr
+        deploymentGateStr,
+        testsToFetch,
+        sonarToFetch,
+        securityToFetch
       });
     } catch (err) {
       if (abortOnChangeCreationFailure) {
