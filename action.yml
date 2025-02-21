@@ -49,9 +49,18 @@ inputs:
   deployment-gate:
     description: 'The customized inputs to process deployment gate job related change.'
     required: false
+  number-of-tests-to-fetch:
+    description: 'Number of test steps associated with the pipeline'
+    required: false
+  number-of-sonar-data-to-fetch:
+    description: 'Number of sonar resgister steps associated with the pipeline'
+    required: false
+  number-of-security-data-to-fetch:
+    description: 'Number of security register steps associated with the pipeline'
+    required: false
 branding:
   icon: 'refresh-ccw'
   color: 'green'
 runs: 
   using: 'node20'
-  main: 'dist/index.js'
+  main: 'src/index.js'
