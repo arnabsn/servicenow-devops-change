@@ -64,6 +64,7 @@ async function createChange({
             'numberOfSoftwareQualityScan': sonarToFetch || 0,
             'numberOfSecurityScan': securityToFetch
         };
+        console.log("--> payload: " + JSON.stringify(payload));
         if (deploymentGateStr) {
             payload.deploymentGateDetails = deploymentGateDetails;
         }
