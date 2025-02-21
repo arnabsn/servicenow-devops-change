@@ -28041,9 +28041,9 @@ async function createChange({
             'repository': `${githubContext.repository}`,
             'branchName': `${githubContext.ref_name}`,
             'changeRequestDetails': changeRequestDetails,
-            'numberOfTests': testsToFetch || 0,
-            'numberOfSoftwareQualityScan': sonarToFetch || 0,
-            'numberOfSecurityScan': securityToFetch
+            'numberOfTests': testsToFetch || "0",
+            'numberOfSoftwareQualityScan': sonarToFetch || "0",
+            'numberOfSecurityScan': securityToFetch || "0"
         };
         console.log("--> payload: " + JSON.stringify(payload));
         if (deploymentGateStr) {
